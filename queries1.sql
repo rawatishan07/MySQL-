@@ -1,0 +1,15 @@
+create TABLE EMPLOYEE(
+  EMP_ID INT PRIMARY KEY AUTO_INCREMENT,
+  NAME varchar(255),
+  SALARY INT 
+  );
+
+INSERT INTO EMPLOYEE (NAME, SALARY) VALUES
+  ('ALICE', 9000),
+  ('BOB', 6000),
+  ('CHARLIE', 5000);
+
+WITH AverageCTE AS(
+  select avg(SALARY) AS global_avg from EMPLOYEE
+  )
+  select E.NAME, E.SALARY, B.global_avg FROM EMPLOYEE E CROSS JOIN AverageCTE B WHERE E.SALARY > B.global_avg
